@@ -11,8 +11,6 @@
       <form @submit.prevent="createAppointment">
         <!-- Search -->
         <div class="mb-4">
-          <label class="block text-gray-700">Search Contact</label>
-          {{ validationErrors.searchQuery }}
           <div class="relative">
             <div class="flex border border-gray-300 rounded">
               <input
@@ -72,7 +70,6 @@
         </div>
         <!-- Address -->
         <div class="mb-4">
-          <label class="block text-gray-700">Address</label>
           <div class="flex items-center border border-gray-300 rounded">
             <input
               v-model="appointmentAddress"
@@ -94,7 +91,6 @@
 
         <!-- Agent Dropdown -->
         <div class="mb-4 relative">
-          <label class="block text-gray-700">Select Agents</label>
           <div class="relative">
             <button
               @click="toggleDropdown"
@@ -329,7 +325,6 @@ const validateForm = () => {
 
 // Create appointment
 const createAppointment = () => {
-  console.log(validateForm());
   if (!validateForm()) {
     return;
   }

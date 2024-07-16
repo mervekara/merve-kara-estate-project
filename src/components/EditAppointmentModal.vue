@@ -19,7 +19,6 @@
         <form @submit.prevent="updateAppointment">
           <!-- Search Contact -->
           <div class="mb-4">
-            <label class="block text-gray-700">Search Contact</label>
             <div class="relative">
               <div class="flex border border-gray-300 rounded">
                 <input
@@ -60,7 +59,6 @@
           </div>
           <!-- Selected Contacts -->
           <div v-if="selectedContacts.length" class="mb-4">
-            <label class="block text-gray-700">Contacts</label>
             <div class="space-y-4 max-h-24 overflow-y-auto">
               <div
                 v-for="contact in selectedContacts"
@@ -92,7 +90,6 @@
           </div>
           <!-- Address -->
           <div class="mb-4">
-            <label class="block text-gray-700">Address</label>
             <div class="flex items-center border border-gray-300 rounded">
               <FontAwesomeIcon :icon="faHome" class="text-gray-700 px-3" />
               <input
@@ -122,7 +119,6 @@
           </div>
           <!-- Agent Dropdown -->
           <div class="mb-4 relative">
-            <label class="block text-gray-700">Select Agents</label>
             <div class="relative">
               <button
                 @click="toggleDropdown"
@@ -200,7 +196,6 @@
           </div>
           <!-- Appointment Status -->
           <div class="mb-4">
-            <label class="block text-gray-700">Status</label>
             <select
               v-model="appointmentStatus"
               class="w-full border border-gray-300 rounded px-4 py-2"
@@ -454,7 +449,7 @@ const isUpcoming = computed(() => {
 });
 
 const statusOptions = computed(() => {
-  if (!isUpcoming.value && appointmentCancelled.value) {
+  if (!isUpcoming.value) {
     return ["Completed", "Cancelled"];
   }
 

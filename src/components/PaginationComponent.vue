@@ -1,6 +1,7 @@
 <template>
   <div class="flex justify-end mt-4 text-sm sm:text-base">
     <button
+      v-if="visiblePages.length"
       @click="prevPage"
       :disabled="currentPage === 1"
       class="px-2 py-1 lg:px-4 lg:py-2 mx-1 bg-gray-200 rounded disabled:opacity-50"
@@ -22,6 +23,7 @@
       {{ page }}
     </button>
     <button
+      v-if="visiblePages.length"
       @click="nextPage"
       :disabled="currentPage === totalPages"
       class="px-2 py-1 lg:px-4 lg:py-2 mx-1 bg-gray-200 rounded disabled:opacity-50"
@@ -42,7 +44,6 @@ const props = defineProps({
 const emit = defineEmits(["changePage"]);
 
 const changePage = (page: number) => {
-  console.log(page);
   emit("changePage", page);
 };
 
