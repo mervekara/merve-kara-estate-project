@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, defineEmits, defineProps } from "vue";
+import { computed, ref, defineEmits, defineProps, watch } from "vue";
 import { useStore } from "vuex";
 import { Appointment } from "@/types";
 import AppointmentItem from "./AppointmentItem.vue";
@@ -90,8 +90,19 @@ const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
 const fromDate = computed(() => store.getters.fromDate);
 const toDate = computed(() => store.getters.toDate);
 const searchQuery = computed(() => store.getters.searchQuery);
-
 const selectedAgents = computed(() => store.getters.selectedAgents);
+
+// Watchers for filters
+const resetPageAndFilterAppointments = () => {
+  currentPage.value = 1;
+};
+
+watch(selectedAgents, resetPageAndFilterAppointments);
+watch(searchQuery, resetPageAndFilterAppointments);
+watch(selectedStatusFilter, resetPageAndFilterAppointments);
+watch(fromDate, resetPageAndFilterAppointments);
+watch(toDate, resetPageAndFilterAppointments);
+
 const formattedAppointments = computed(() =>
   appointments.value.map((appointment) => ({
     ...appointment,
@@ -191,7 +202,6 @@ const changePage = (page: number) => {
 };
 
 const openEditModal = (appointment: Appointment) => {
-  console.log("adad");
   emit("editAppointment", appointment);
 };
 
