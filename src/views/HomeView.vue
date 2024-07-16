@@ -5,19 +5,16 @@
       :selectedStatusFilter="selectedStatusFilter"
       :fromDate="fromDate"
       :toDate="toDate"
-      @openAgentSelectionModal="openAgentSelectionModal"
       @statusChanged="setStatusFilter"
       @updateFromDate="setFromDate"
       @updateToDate="setToDate"
       @updateSearchQuery="setSearchQuery"
     />
     <SelectedFilters
-      :selectedAgents="selectedAgents"
       :selectedStatusFilter="selectedStatusFilter"
       :fromDate="fromDate"
       :toDate="toDate"
       :searchQuery="searchQuery"
-      @updateSelectedAgents="setSelectedAgents"
       @updateStatusFilter="setStatusFilter"
       @updateFromDate="setFromDate"
       @updateToDate="setToDate"
@@ -44,12 +41,6 @@
       @appointmentUpdated="refreshAppointments"
       @close="showEditModal = false"
     />
-    <AgentSelectionModal
-      v-if="showAgentSelectionModal"
-      :selectedAgents="selectedAgents"
-      @close="closeAgentSelectionModal"
-      @save="saveSelectedAgents"
-    />
   </div>
 </template>
 
@@ -61,7 +52,6 @@ import SelectedFilters from "../components/SelectedFilters.vue";
 import AppointmentList from "../components/AppointmentList.vue";
 import CreateAppointmentModal from "../components/CreateAppointmentModal.vue";
 import EditAppointmentModal from "../components/EditAppointmentModal.vue";
-import AgentSelectionModal from "../components/AgentSelectionModal.vue";
 import Error from "../components/ErrorNotification.vue";
 
 // Vuex store
@@ -71,7 +61,6 @@ const store = useStore();
 const showCreateModal = ref(false);
 const showEditModal = ref(false);
 const currentAppointment = ref(null);
-const showAgentSelectionModal = ref(false);
 const selectedAgents = ref<number[]>([]);
 
 // Handle filtered appointments
@@ -133,19 +122,6 @@ const openEditModal = (appointment) => {
   showEditModal.value = true;
 };
 
-const openAgentSelectionModal = () => {
-  showAgentSelectionModal.value = true;
-};
-
-const closeAgentSelectionModal = () => {
-  showAgentSelectionModal.value = false;
-};
-
-const saveSelectedAgents = (selected) => {
-  selectedAgents.value = selected;
-  closeAgentSelectionModal();
-};
-
 const selectedStatusFilter = ref("All Statuses");
 const fromDate = ref("");
 const toDate = ref("");
@@ -167,9 +143,5 @@ const setToDate = (date: string) => {
 
 const setSearchQuery = (query: string) => {
   searchQuery.value = query;
-};
-
-const setSelectedAgents = (agents: number[]) => {
-  selectedAgents.value = agents;
 };
 </script>

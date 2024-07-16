@@ -25,13 +25,21 @@
       </span>
     </div>
   </div>
+
+  <AgentSelectionModal
+    v-if="showAgentSelectionModal"
+    @close="closeAgentSelectionModal"
+    @save="saveSelectedAgents"
+  />
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits } from "vue";
+import AgentSelectionModal from "../components/AgentSelectionModal.vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { getAgentInitial } from "../utils/index.ts";
-const emit = defineEmits("openAgentSelectionModal");
+
+const showAgentSelectionModal = ref(false);
 
 const store = useStore();
 
@@ -41,6 +49,14 @@ const firstFiveAgents = computed(() => agents.value.slice(0, 5));
 const remainingAgentsCount = computed(() => agents.value.length - 5);
 
 const openAgentSelectionModal = () => {
-  emit("openAgentSelectionModal");
+  showAgentSelectionModal.value = true;
+};
+
+const closeAgentSelectionModal = () => {
+  showAgentSelectionModal.value = false;
+};
+
+const saveSelectedAgents = () => {
+  closeAgentSelectionModal();
 };
 </script>

@@ -43,21 +43,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineEmits, defineProps, onMounted } from "vue";
+import { ref, computed, defineEmits, onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
 const emit = defineEmits(["close", "save"]);
-
-const props = defineProps({
-  selectedAgents: [],
-});
+const selectedAgents = computed(() => store.getters.selectedAgents);
 
 const agents = computed(() => store.state.agents.agents);
 const localSelectedAgents = ref<number[]>([]);
 
 onMounted(() => {
-  localSelectedAgents.value = [...props.selectedAgents];
+  localSelectedAgents.value = [...selectedAgents.value];
 });
 
 const closeModal = () => {
@@ -65,10 +62,7 @@ const closeModal = () => {
 };
 
 const confirmSelection = () => {
-  emit("save", localSelectedAgents.value);
+  store.dispatch("updateSelectedAgents", localSelectedAgents.value);
+  emit("save");
 };
 </script>
-
-<style scoped>
-/* Add any necessary styles here */
-</style>

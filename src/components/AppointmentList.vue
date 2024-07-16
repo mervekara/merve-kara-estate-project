@@ -76,7 +76,6 @@ const emit = defineEmits([
 ]);
 const props = defineProps({
   isLoading: Boolean,
-  selectedAgents: Array,
   selectedStatusFilter: String,
   fromDate: String,
   toDate: String,
@@ -91,6 +90,7 @@ const itemsPerPage = ref(10);
 
 const appointments = computed(() => store.getters.getAppointmentsData);
 
+const selectedAgents = computed(() => store.getters.selectedAgents);
 const formattedAppointments = computed(() =>
   appointments.value.map((appointment) => ({
     ...appointment,
@@ -118,10 +118,10 @@ const sortedAppointments = computed(() =>
 const filteredAppointments = computed(() => {
   let filtered = sortedAppointments.value;
 
-  if (props.selectedAgents.length > 0) {
+  if (selectedAgents.value.length > 0) {
     filtered = filtered.filter((appointment) =>
       appointment.agent_id?.some((agentId: number) =>
-        props.selectedAgents.includes(agentId)
+        selectedAgents.value.includes(agentId)
       )
     );
   }

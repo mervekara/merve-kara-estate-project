@@ -2,7 +2,7 @@ import { ActionTree } from "vuex";
 import { RootState } from "../index";
 import { AgentsState } from "./types";
 import { fetchData } from "../../services/index";
-import { agentTableName, SET_AGENTS } from "@/constants";
+import { agentTableName, SET_AGENTS, SET_SELECTED_AGENTS } from "@/constants";
 import { AirtableError } from "@/utils/errors";
 
 const actions: ActionTree<AgentsState, RootState> = {
@@ -18,6 +18,9 @@ const actions: ActionTree<AgentsState, RootState> = {
       console.error(err);
       throw err;
     }
+  },
+  updateSelectedAgents({ commit }, agents: string[]) {
+    commit(SET_SELECTED_AGENTS, agents);
   },
 };
 

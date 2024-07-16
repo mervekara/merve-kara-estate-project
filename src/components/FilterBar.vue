@@ -3,7 +3,7 @@
     class="filters mb-4 p-4 bg-white rounded shadow flex flex-col lg:flex-row lg:space-x-4 lg:justify-between"
   >
     <div class="mb-4 lg:mb-0">
-      <AgentCircles @openAgentSelectionModal="openAgentSelectionModal" />
+      <AgentCircles />
     </div>
     <div class="mb-4 lg:mb-0">
       <StatusFilter
@@ -40,10 +40,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["openAgentSelectionModal"]);
-
-const openAgentSelectionModal = () => {
-  emit("openAgentSelectionModal");
-};
 
 const setStatusFilter = (status: string) => {
   emit("statusChanged", status);

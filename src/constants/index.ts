@@ -3,6 +3,7 @@ export const appointmentsTableName = "Appointments";
 // Agents Constants
 export const agentTableName = "Agents";
 export const SET_AGENTS = "SET_AGENTS";
+export const SET_SELECTED_AGENTS = "SET_SELECTED_AGENTS";
 
 // Appoinment Constants
 export const SET_APPOINMENT = "SET_APPOINMENT";

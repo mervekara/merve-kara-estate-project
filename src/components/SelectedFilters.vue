@@ -64,40 +64,40 @@ import { computed, defineEmits, defineProps } from "vue";
 import { useStore } from "vuex";
 
 const emit = defineEmits([
-  "updateSelectedAgents",
   "updateStatusFilter",
   "updateFromDate",
   "updateToDate",
 ]);
 
-const store = useStore();
-
 const props = defineProps({
-  selectedAgents: Array,
   selectedStatusFilter: String,
   fromDate: String,
   toDate: String,
   searchQuery: String,
 });
 
+const store = useStore();
+const selectedAgents = computed(() => store.getters.selectedAgents);
 const agents = computed(() => store.getters.getAgentsData);
 const selectedAgentsList = computed(() => {
   return agents.value.filter((agent) =>
-    props.selectedAgents.includes(agent.id)
+    selectedAgents.value.includes(agent.id)
   );
 });
 
 const shouldShowSelectedFiltersDivider = computed(
   () =>
-    props.selectedAgents.length ||
+    selectedAgents.value.length ||
     !!props.fromDate ||
     !!props.toDate ||
     props.selectedStatusFilter !== "All Statuses"
 );
 
-const removeAgentFilter = (agentId: number) => {
-  const selectedAgents = props.selectedAgents.filter((id) => id !== agentId);
-  emit("updateSelectedAgents", selectedAgents);
+const removeAgentFilter = (agentId: string) => {
+  const updatedSelectedAgents = selectedAgents.value.filter(
+    (id: string) => id !== agentId
+  );
+  store.dispatch("updateSelectedAgents", updatedSelectedAgents);
 };
 
 const removeStatusFilter = () => {

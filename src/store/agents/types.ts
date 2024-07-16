@@ -7,4 +7,5 @@ export interface Agent {
 
 export interface AgentsState {
   agents: Agent[];
+  selectedAgents: string[];
 }
