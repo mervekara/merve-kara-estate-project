@@ -60,18 +60,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits, defineProps } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
-
-const emit = defineEmits([
-  "updateStatusFilter",
-  "updateFromDate",
-  "updateToDate",
-]);
-
-const props = defineProps({
-  searchQuery: String,
-});
 
 const store = useStore();
 

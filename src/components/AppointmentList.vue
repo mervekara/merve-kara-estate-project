@@ -74,9 +74,9 @@ const emit = defineEmits([
   "editAppointment",
   "openCreateModal",
 ]);
-const props = defineProps({
+
+defineProps({
   isLoading: Boolean,
-  searchQuery: String,
 });
 
 const store = useStore();
@@ -89,6 +89,7 @@ const appointments = computed(() => store.getters.getAppointmentsData);
 const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
 const fromDate = computed(() => store.getters.fromDate);
 const toDate = computed(() => store.getters.toDate);
+const searchQuery = computed(() => store.getters.searchQuery);
 
 const selectedAgents = computed(() => store.getters.selectedAgents);
 const formattedAppointments = computed(() =>
@@ -147,8 +148,8 @@ const filteredAppointments = computed(() => {
     );
   }
 
-  if (props.searchQuery) {
-    const query = props.searchQuery.toLowerCase();
+  if (searchQuery.value) {
+    const query = searchQuery.value.toLowerCase();
     filtered = filtered.filter(
       (appointment) =>
         appointment.contact_name.find((name) =>

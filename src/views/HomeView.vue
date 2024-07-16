@@ -1,11 +1,10 @@
 <template>
   <div class="container mx-auto p-4">
     <Error :errorNotificaiton="errorNotificaiton" />
-    <FilterBar @updateSearchQuery="setSearchQuery" />
-    <SelectedFilters :searchQuery="searchQuery" />
+    <FilterBar />
+    <SelectedFilters />
     <AppointmentList
       :isLoading="isLoading"
-      :searchQuery="searchQuery"
       @filteredAppointments="updateFilteredAppointments"
       @editAppointment="openEditModal"
       @openCreateModal="openCreateModal"
@@ -99,11 +98,5 @@ const openCreateModal = () => {
 const openEditModal = (appointment) => {
   currentAppointment.value = appointment;
   showEditModal.value = true;
-};
-
-const searchQuery = ref("");
-
-const setSearchQuery = (query: string) => {
-  searchQuery.value = query;
 };
 </script>

@@ -12,22 +12,15 @@
       <DateRangeFilter />
     </div>
     <div class="mb-4 lg:mb-0">
-      <SearchInput @updateSearchQuery="setSearchQuery" />
+      <SearchInput />
     </div>
   </div>
   <div class="flex-grow border-t border-gray-400 mb-4"></div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from "vue";
 import AgentCircles from "../components/AgentCircles.vue";
 import StatusFilter from "../components/StatusFilter.vue";
 import DateRangeFilter from "../components/DateRangeFilter.vue";
 import SearchInput from "../components/SearchInput.vue";
-
-const emit = defineEmits(["openAgentSelectionModal"]);
-
-const setSearchQuery = (query: string) => {
-  emit("updateSearchQuery", query);
-};
 </script>

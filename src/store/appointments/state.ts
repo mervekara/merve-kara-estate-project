@@ -5,6 +5,7 @@ const state: AppointmentsState = {
   selectedStatusFilter: "All Statuses",
   fromDate: "",
   toDate: "",
+  searchQuery: "",
 };
 
 export default state;

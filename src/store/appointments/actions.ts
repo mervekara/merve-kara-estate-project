@@ -7,6 +7,7 @@ import {
   appointmentsTableName,
   SET_APPOINMENTS,
   SET_FROM_DATE,
+  SET_SEARCH_QUERY,
   SET_SELECTED_STATUS_FILTER,
   SET_TO_DATE,
 } from "@/constants";
@@ -53,6 +54,9 @@ const actions: ActionTree<AppointmentsState, RootState> = {
   },
   updateToDate({ commit }, date: string) {
     commit(SET_TO_DATE, date);
+  },
+  updateSearchQuery({ commit }, query: string) {
+    commit(SET_SEARCH_QUERY, query);
   },
 };
 

@@ -4,6 +4,7 @@ import {
   ADD_APPOINMENT,
   SET_APPOINMENTS,
   SET_FROM_DATE,
+  SET_SEARCH_QUERY,
   SET_SELECTED_STATUS_FILTER,
   SET_TO_DATE,
 } from "@/constants";
@@ -24,6 +25,9 @@ const mutations: MutationTree<AppointmentsState> = {
   },
   [SET_TO_DATE](state, date: string) {
     state.toDate = date;
+  },
+  [SET_SEARCH_QUERY](state, query: string) {
+    state.searchQuery = query;
   },
 };
 

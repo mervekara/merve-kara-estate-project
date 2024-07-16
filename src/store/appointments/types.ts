@@ -5,4 +5,5 @@ export interface AppointmentsState {
   selectedStatusFilter: string;
   fromDate: string;
   toDate: string;
+  searchQuery: string;
 }
