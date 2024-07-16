@@ -33,7 +33,7 @@ You can view the live application [here](https://merve-kara-estate-project.verce
 
     ```bash
     git clone https://github.com/mervekara/merve-kara-estate-project.git
-    cd your-repo
+    cd merve-kara-estate-project
     ```
 2. You need to set up the following environment variables. Create a `.env.local` file in the root directory and add the following lines:
 
