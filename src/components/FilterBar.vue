@@ -6,10 +6,7 @@
       <AgentCircles />
     </div>
     <div class="mb-4 lg:mb-0">
-      <StatusFilter
-        @statusChanged="setStatusFilter"
-        :selectedStatusFilter="selectedStatusFilter"
-      />
+      <StatusFilter />
     </div>
     <div class="mb-4 lg:mb-0">
       <DateRangeFilter
@@ -34,16 +31,15 @@ import DateRangeFilter from "../components/DateRangeFilter.vue";
 import SearchInput from "../components/SearchInput.vue";
 
 const props = defineProps({
-  selectedStatusFilter: String,
   fromDate: String,
   toDate: String,
 });
 
 const emit = defineEmits(["openAgentSelectionModal"]);
 
-const setStatusFilter = (status: string) => {
-  emit("statusChanged", status);
-};
+// const setStatusFilter = (status: string) => {
+//   emit("statusChanged", status);
+// };
 
 const setFromDate = (date: string) => {
   emit("updateFromDate", date);

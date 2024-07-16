@@ -76,7 +76,6 @@ const emit = defineEmits([
 ]);
 const props = defineProps({
   isLoading: Boolean,
-  selectedStatusFilter: String,
   fromDate: String,
   toDate: String,
   searchQuery: String,
@@ -89,6 +88,7 @@ const currentPage = ref(1);
 const itemsPerPage = ref(10);
 
 const appointments = computed(() => store.getters.getAppointmentsData);
+const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
 
 const selectedAgents = computed(() => store.getters.selectedAgents);
 const formattedAppointments = computed(() =>
@@ -126,10 +126,10 @@ const filteredAppointments = computed(() => {
     );
   }
 
-  if (props.selectedStatusFilter !== "All Statuses") {
+  if (selectedStatusFilter.value !== "All Statuses") {
     filtered = filtered.filter(
       (appointment) =>
-        determineStatus(appointment) === props.selectedStatusFilter
+        determineStatus(appointment) === selectedStatusFilter.value
     );
   }
 

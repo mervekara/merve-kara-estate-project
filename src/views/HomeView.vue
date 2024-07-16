@@ -2,27 +2,21 @@
   <div class="container mx-auto p-4">
     <Error :errorNotificaiton="errorNotificaiton" />
     <FilterBar
-      :selectedStatusFilter="selectedStatusFilter"
       :fromDate="fromDate"
       :toDate="toDate"
-      @statusChanged="setStatusFilter"
       @updateFromDate="setFromDate"
       @updateToDate="setToDate"
       @updateSearchQuery="setSearchQuery"
     />
     <SelectedFilters
-      :selectedStatusFilter="selectedStatusFilter"
       :fromDate="fromDate"
       :toDate="toDate"
       :searchQuery="searchQuery"
-      @updateStatusFilter="setStatusFilter"
       @updateFromDate="setFromDate"
       @updateToDate="setToDate"
     />
     <AppointmentList
       :isLoading="isLoading"
-      :selectedAgents="selectedAgents"
-      :selectedStatusFilter="selectedStatusFilter"
       :fromDate="fromDate"
       :toDate="toDate"
       :searchQuery="searchQuery"
@@ -61,7 +55,6 @@ const store = useStore();
 const showCreateModal = ref(false);
 const showEditModal = ref(false);
 const currentAppointment = ref(null);
-const selectedAgents = ref<number[]>([]);
 
 // Handle filtered appointments
 const filteredAppointments = ref([]);
@@ -122,14 +115,9 @@ const openEditModal = (appointment) => {
   showEditModal.value = true;
 };
 
-const selectedStatusFilter = ref("All Statuses");
 const fromDate = ref("");
 const toDate = ref("");
 const searchQuery = ref("");
-
-const setStatusFilter = (status: string) => {
-  selectedStatusFilter.value = status;
-};
 
 const setFromDate = (date: string) => {
   console.log(!!date);

@@ -12,6 +12,7 @@ export const UPDATE_APPOINMENT = "UPDATE_APPOINMENT";
 // Appoinments Constants
 export const SET_APPOINMENTS = "SET_APPOINMENTS";
 export const ADD_APPOINMENT = "ADD_APPOINMENT";
+export const SET_SELECTED_STATUS_FILTER = "SET_SELECTED_STATUS_FILTER";
 
 // Contacts Constants
 export const contactsTableName = "Contacts";

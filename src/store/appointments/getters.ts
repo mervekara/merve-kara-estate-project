@@ -6,4 +6,5 @@ export const getters: GetterTree<AppointmentsState, RootState> = {
   getAppointmentsData: (state) => {
     return state.appointments;
   },
+  selectedStatusFilter: (state) => state.selectedStatusFilter,
 };

@@ -6,6 +6,7 @@ import {
   ADD_APPOINMENT,
   appointmentsTableName,
   SET_APPOINMENTS,
+  SET_SELECTED_STATUS_FILTER,
 } from "@/constants";
 import { AirtableError } from "@/utils/errors";
 import { Appointment } from "@/types";
@@ -41,6 +42,9 @@ const actions: ActionTree<AppointmentsState, RootState> = {
 
       throw err;
     }
+  },
+  updateStatusFilter({ commit }, status: string) {
+    commit(SET_SELECTED_STATUS_FILTER, status);
   },
 };
 

@@ -23,23 +23,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineEmits, defineProps } from "vue";
-const props = defineProps({
-  selectedStatusFilter: String,
-});
+import { ref, watch, computed } from "vue";
+import { useStore } from "vuex";
+
+const store = useStore();
+const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
 
 const statusFilters = ["All Statuses", "Cancelled", "Upcoming", "Completed"];
-const localSelectedStatusFilter = ref(props.selectedStatusFilter);
+const localSelectedStatusFilter = ref(selectedStatusFilter.value);
 const isDropdownOpen = ref(false);
-
-const emit = defineEmits("statusChanged");
 
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
 };
 
 watch(
-  () => props.selectedStatusFilter,
+  () => selectedStatusFilter.value,
   (newVal) => {
     localSelectedStatusFilter.value = newVal;
   }
@@ -48,6 +47,7 @@ watch(
 const setStatusFilter = (status: string) => {
   localSelectedStatusFilter.value = status;
   isDropdownOpen.value = false;
-  emit("statusChanged", status);
+  store.dispatch("updateStatusFilter", status);
+  // emit("statusChanged", status);
 };
 </script>

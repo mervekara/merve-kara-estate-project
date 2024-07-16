@@ -70,7 +70,6 @@ const emit = defineEmits([
 ]);
 
 const props = defineProps({
-  selectedStatusFilter: String,
   fromDate: String,
   toDate: String,
   searchQuery: String,
@@ -78,6 +77,7 @@ const props = defineProps({
 
 const store = useStore();
 const selectedAgents = computed(() => store.getters.selectedAgents);
+const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
 const agents = computed(() => store.getters.getAgentsData);
 const selectedAgentsList = computed(() => {
   return agents.value.filter((agent) =>
@@ -90,7 +90,7 @@ const shouldShowSelectedFiltersDivider = computed(
     selectedAgents.value.length ||
     !!props.fromDate ||
     !!props.toDate ||
-    props.selectedStatusFilter !== "All Statuses"
+    selectedStatusFilter.value !== "All Statuses"
 );
 
 const removeAgentFilter = (agentId: string) => {
@@ -101,7 +101,8 @@ const removeAgentFilter = (agentId: string) => {
 };
 
 const removeStatusFilter = () => {
-  emit("updateStatusFilter", "All Statuses");
+  store.dispatch("updateStatusFilter", "All Statuses");
+  // emit("updateStatusFilter", "All Statuses");
 };
 
 const removeFromDateFilter = () => {
