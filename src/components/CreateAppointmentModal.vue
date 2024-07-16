@@ -324,7 +324,7 @@ const validateForm = () => {
 };
 
 // Create appointment
-const createAppointment = () => {
+const createAppointment = async () => {
   if (!validateForm()) {
     return;
   }
@@ -337,7 +337,7 @@ const createAppointment = () => {
   };
 
   try {
-    store.dispatch("createAppointment", newAppointment);
+    await store.dispatch("createAppointment", newAppointment);
     emit("appointmentCreated");
     emit("close");
   } catch (error) {
