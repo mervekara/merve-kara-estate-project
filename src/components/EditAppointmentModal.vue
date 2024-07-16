@@ -222,7 +222,7 @@
               <div
                 v-for="related in relatedAppointments"
                 :key="related.id"
-                class="bg-white rounded shadow-md p-4 mb-2 flex justify-between items-center"
+                class="bg-white rounded shadow-md p-4 mb-2 flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row justify-between sm:items-start md:items-center lg:items-center xl:items-center"
               >
                 <div class="flex flex-col">
                   <div class="text-lg font-semibold mb-2">
@@ -246,7 +246,7 @@
                     </span>
                   </div>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center justify-center">
                   <div
                     v-for="agentId in related.agent_id"
                     :key="agentId"
