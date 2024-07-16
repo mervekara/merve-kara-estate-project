@@ -38,7 +38,7 @@ You can view the live application [here](https://merve-kara-estate-project.verce
 2. You need to set up the following environment variables. Create a `.env.local` file in the root directory and add the following lines:
 
     ```bash
-    VUE_APP_AIRTABLE_API_TOKEN=
+    VUE_APP_AIRTABLE_API_TOKEN=YOUR_SECRET_API_TOKEN
     VUE_APP_AIRTABLE_BASE_ID=appkTtnhXACqj0kag
     ```
 
