@@ -70,15 +70,18 @@ const emit = defineEmits([
 ]);
 
 const props = defineProps({
-  fromDate: String,
-  toDate: String,
   searchQuery: String,
 });
 
 const store = useStore();
+
+const agents = computed(() => store.getters.getAgentsData);
+
 const selectedAgents = computed(() => store.getters.selectedAgents);
 const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
-const agents = computed(() => store.getters.getAgentsData);
+const fromDate = computed(() => store.getters.fromDate);
+const toDate = computed(() => store.getters.toDate);
+
 const selectedAgentsList = computed(() => {
   return agents.value.filter((agent) =>
     selectedAgents.value.includes(agent.id)
@@ -88,8 +91,8 @@ const selectedAgentsList = computed(() => {
 const shouldShowSelectedFiltersDivider = computed(
   () =>
     selectedAgents.value.length ||
-    !!props.fromDate ||
-    !!props.toDate ||
+    !!fromDate.value ||
+    !!toDate.value ||
     selectedStatusFilter.value !== "All Statuses"
 );
 
@@ -102,14 +105,13 @@ const removeAgentFilter = (agentId: string) => {
 
 const removeStatusFilter = () => {
   store.dispatch("updateStatusFilter", "All Statuses");
-  // emit("updateStatusFilter", "All Statuses");
 };
 
 const removeFromDateFilter = () => {
-  emit("updateFromDate", "");
+  store.dispatch("updateFromDate", "");
 };
 
 const removeToDateFilter = () => {
-  emit("updateToDate", "");
+  store.dispatch("updateToDate", "");
 };
 </script>

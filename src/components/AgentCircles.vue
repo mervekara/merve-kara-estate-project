@@ -37,6 +37,7 @@
 import AgentSelectionModal from "../components/AgentSelectionModal.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+
 import { getAgentInitial } from "../utils/index.ts";
 
 const showAgentSelectionModal = ref(false);

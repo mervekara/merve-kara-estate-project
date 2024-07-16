@@ -76,8 +76,6 @@ const emit = defineEmits([
 ]);
 const props = defineProps({
   isLoading: Boolean,
-  fromDate: String,
-  toDate: String,
   searchQuery: String,
 });
 
@@ -89,6 +87,8 @@ const itemsPerPage = ref(10);
 
 const appointments = computed(() => store.getters.getAppointmentsData);
 const selectedStatusFilter = computed(() => store.getters.selectedStatusFilter);
+const fromDate = computed(() => store.getters.fromDate);
+const toDate = computed(() => store.getters.toDate);
 
 const selectedAgents = computed(() => store.getters.selectedAgents);
 const formattedAppointments = computed(() =>
@@ -133,17 +133,17 @@ const filteredAppointments = computed(() => {
     );
   }
 
-  if (props.fromDate) {
+  if (fromDate.value) {
     filtered = filtered.filter(
       (appointment) =>
-        new Date(appointment.appointment_date) >= new Date(props.fromDate)
+        new Date(appointment.appointment_date) >= new Date(fromDate.value)
     );
   }
 
-  if (props.toDate) {
+  if (toDate.value) {
     filtered = filtered.filter(
       (appointment) =>
-        new Date(appointment.appointment_date) <= new Date(props.toDate)
+        new Date(appointment.appointment_date) <= new Date(toDate.value)
     );
   }
 

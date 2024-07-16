@@ -21,37 +21,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, defineProps, defineEmits } from "vue";
+import { useStore } from "vuex";
+import { ref, watch, computed } from "vue";
+const store = useStore();
 
-const props = defineProps({
-  fromDate: String,
-  toDate: String,
-});
+const fromDate = computed(() => store.getters.fromDate);
+const toDate = computed(() => store.getters.toDate);
 
-const emit = defineEmits(["updateFromDate", "updateToDate"]);
-
-const localFromDate = ref(props.fromDate);
-const localToDate = ref(props.toDate);
+const localFromDate = ref(fromDate.value);
+const localToDate = ref(toDate.value);
 
 watch(
-  () => props.fromDate,
+  () => fromDate.value,
   (newVal) => {
     localFromDate.value = newVal;
   }
 );
 
 watch(
-  () => props.toDate,
+  () => toDate.value,
   (newVal) => {
     localToDate.value = newVal;
   }
 );
 
 const updateFromDate = () => {
-  emit("updateFromDate", localFromDate.value);
+  store.dispatch("updateFromDate", localFromDate.value);
 };
 
 const updateToDate = () => {
-  emit("updateToDate", localToDate.value);
+  store.dispatch("updateToDate", localToDate.value);
 };
 </script>

@@ -1,24 +1,10 @@
 <template>
   <div class="container mx-auto p-4">
     <Error :errorNotificaiton="errorNotificaiton" />
-    <FilterBar
-      :fromDate="fromDate"
-      :toDate="toDate"
-      @updateFromDate="setFromDate"
-      @updateToDate="setToDate"
-      @updateSearchQuery="setSearchQuery"
-    />
-    <SelectedFilters
-      :fromDate="fromDate"
-      :toDate="toDate"
-      :searchQuery="searchQuery"
-      @updateFromDate="setFromDate"
-      @updateToDate="setToDate"
-    />
+    <FilterBar @updateSearchQuery="setSearchQuery" />
+    <SelectedFilters :searchQuery="searchQuery" />
     <AppointmentList
       :isLoading="isLoading"
-      :fromDate="fromDate"
-      :toDate="toDate"
       :searchQuery="searchQuery"
       @filteredAppointments="updateFilteredAppointments"
       @editAppointment="openEditModal"
@@ -115,19 +101,7 @@ const openEditModal = (appointment) => {
   showEditModal.value = true;
 };
 
-const fromDate = ref("");
-const toDate = ref("");
 const searchQuery = ref("");
-
-const setFromDate = (date: string) => {
-  console.log(!!date);
-  fromDate.value = date || "";
-  console.log(fromDate.value);
-};
-
-const setToDate = (date: string) => {
-  toDate.value = date;
-};
 
 const setSearchQuery = (query: string) => {
   searchQuery.value = query;
